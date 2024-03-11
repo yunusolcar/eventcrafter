@@ -1,12 +1,14 @@
-from django.shortcuts import HttpResponse
 from django.shortcuts import render
-
+from event.models import Event
 # Create your views here.
 def index(request):
-    return render(request,'event/index.html')
+    context = {'events': Event.objects.all()}
+    return render(request,'event/index.html', context)
 
 def events(request):
-    return render(request, 'event/events.html')
+    context = {'events': Event.objects.all()}
+    return render(request, 'event/events.html', context)
 
 def single_event(request, id):
-    return render(request, 'event/single-event.html', {"id":id})
+    event = Event.objects.get(id=id)
+    return render(request, 'event/single-event.html', {"event":event})
