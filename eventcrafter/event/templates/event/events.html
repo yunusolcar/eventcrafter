@@ -1,14 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Events Page {% endblock %}
+{% block title %} Index Page {% endblock %}
 
 {% block content %}
-
-<ul>
-     <li><a href="">Home</a></li>
-     <li><a href="/events">Events</a></li>
-</ul>
-
-<h1>Events</h1>
-
+{% include 'partials/_main.html' %}
+<main>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for event in events %}
+                {% include 'event/partials/_event.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

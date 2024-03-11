@@ -7,6 +7,7 @@ class Event(models.Model):
     member = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     event_date = models.DateTimeField()
+    image = models.CharField(max_length=100, default='1.jpeg')
 
     def __str__(self):
         return self.name
