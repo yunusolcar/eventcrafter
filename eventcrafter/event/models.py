@@ -10,7 +10,7 @@ class Event(models.Model):
     is_interested = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     event_date = models.DateTimeField()
-    image = models.ImageField(upload_to='uploads')
+    image = models.ImageField(upload_to='events')
     slug = models.SlugField(null=False, unique=True, db_index=True)
     participants = models.ManyToManyField(User)
 
