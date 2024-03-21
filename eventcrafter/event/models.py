@@ -1,18 +1,19 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Event(models.Model):
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=100)
     description = models.TextField()
-    is_interested = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     event_date = models.DateTimeField()
     image = models.ImageField(upload_to='events')
     slug = models.SlugField(null=False, unique=True, db_index=True)
-    participants = models.ManyToManyField(User)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events', db_index=True)
+    participants = models.ManyToManyField(User, related_name='joined_events')
 
     class Meta:
         verbose_name = 'Event'
@@ -27,13 +28,13 @@ class Event(models.Model):
 
 
 class Notification(models.Model):
-    participant = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='notifications')
+    message = models.TextField()
+    recipients = models.ManyToManyField(User, related_name='received_notifications')
     timestamp = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField()
 
     def __str__(self):
-        return f"{self.participants.username} - {self.event.name}"
+        return self.message
 
     class Meta:
         verbose_name = 'Notification'
@@ -43,8 +44,24 @@ class Notification(models.Model):
 class Comment(models.Model):
     text = models.TextField(max_length=500)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='comments')
-    participants = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Comment by {self.user.username} on {self.event.name}"
 
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+    followed_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('follower', 'followed_user')
+
+    def __str__(self):
+        return f'{self.follower.username} follows {self.followed_user.username}'
