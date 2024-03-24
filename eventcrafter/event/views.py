@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from event.models import Event
 from django.contrib.auth.models import User
+from django.views.generic import View
+from .forms import CreateEventForm
+from django.urls import reverse
+import pdb
 
 
 # Create your views here.
@@ -31,5 +35,21 @@ def about(request):
     return render(request, 'event/about.html')
 
 
-def create_event(request):
-    return render(request, 'event/create-event.html')
+class CreateEvent(View):
+
+    def get(self, request):
+        # pdb.set_trace()
+        form = CreateEventForm()
+        return render(request, 'event/create-event.html', {'form': form})
+
+    def post(self, request):
+        form = CreateEventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.creator = request.user
+            event.save()
+            print(request.user)
+            return redirect('create-event')
+        else:
+            print(form.errors)
+            return render(request, 'event/create-event.html', {'form': form})
