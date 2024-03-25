@@ -3,6 +3,7 @@ from event.models import Event
 from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import CreateEventForm
+from django.utils import timezone
 from django.urls import reverse
 import pdb
 
@@ -22,7 +23,10 @@ def index(request):
 
 
 def events(request):
-    context = {'events': Event.objects.all()}
+    now = timezone.now()
+    events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:12]
+    context = {
+        'events': events}
     return render(request, 'event/events.html', context)
 
 
