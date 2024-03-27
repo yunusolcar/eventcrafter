@@ -64,7 +64,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #DFFF00;
+  color: #E52B50;
   position: relative;
   z-index: 2;
   margin-bottom: 20px;
@@ -128,7 +128,7 @@ section {
 
 .breadcrumbs .page-header:before {
   content: "";
-  background-color: rgba(14, 29, 52, 0.8);
+
   position: absolute;
   inset: 0;
 }
@@ -345,7 +345,7 @@ section {
 
   .navbar .get-a-quote,
   .navbar .get-a-quote:focus {
-    background: var(--color-primary);
+    background: #2756ff;
     padding: 8px 20px;
     margin-left: 30px;
     border-radius: 4px;
@@ -354,8 +354,8 @@ section {
 
   .navbar .get-a-quote:hover,
   .navbar .get-a-quote:focus:hover {
-    color: #fff;
-    background: #2756ff;
+    color: #000000;
+    background: #b2ec00;
   }
 
   .navbar .dropdown ul {
@@ -769,7 +769,7 @@ section {
 }
 
 .services .card a {
-  color: #001973;
+  color: #fff;
   transition: 0.3;
 }
 
@@ -1692,7 +1692,7 @@ section {
   width: 100%;
   min-height: 50vh;
   background-color: var(--color-secondary);
-  background-image: url("https://www.ucsfhealth.org/-/media/project/ucsf/ucsf-health/education/hero/running-a-marathon-race-day-success-2x.jpg?h=1112&iar=0&w=2880&hash=F8BAD6C524275FF2CA9C0544E99FA4A4");
+  background-image: url({% static 'event/img/running2.jpg' %});
   filter: brightness(85%);
   background-size: cover;
   background-position: center;
@@ -1908,4 +1908,60 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+.card {
+  border-radius: 20px; /* Kartların köşe yuvarlaklığını artırır */
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 20px; /* Resimlerin üst köşelerini de yuvarlar */
+  border-top-right-radius: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #ffd700;
+  margin-top: auto;
+}
+
+.num-reviews {
+  margin-left: 5px;
+  color: #666;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.availability-title {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.book-button {
+  margin-top: auto;
 }

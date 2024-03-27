@@ -10,7 +10,8 @@ import pdb
 
 # Create your views here.
 def index(request):
-    events = Event.objects.all()
+    now = timezone.now()
+    events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:3]
     participant_count = User.objects.all().count()
     event_count = Event.objects.all().count()
     context = {
@@ -52,8 +53,6 @@ class CreateEvent(View):
             event = form.save(commit=False)
             event.creator = request.user
             event.save()
-            print(request.user)
             return redirect('create-event')
         else:
-            print(form.errors)
             return render(request, 'event/create-event.html', {'form': form})

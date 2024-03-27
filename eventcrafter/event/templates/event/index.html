@@ -11,9 +11,6 @@
     <meta content="" name="keywords">
 
     {% block css_files %}
-    <!-- Favicons -->
-    <link href="{% static 'event/img/favicon.png' %}" rel="icon">
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +35,10 @@
 
 {% include 'partials/_header.html' %}
 <!-- End Header -->
+
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="hero d-flex align-items-center">
+<section id="hero" class="hero d-flex align-items-center"
+         style="background-image: url({% static 'event/img/marathon.jpg' %});">
     <div class="container">
         <div class="row gy-4 d-flex justify-content-between">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
@@ -94,11 +93,8 @@
                 <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
                     <div class="icon flex-shrink-0"><i class="fa fa-bullhorn"></i></div>
                     <div>
-                        <h4 class="title">Discover & Join: Exciting Events Await!</h4>
-                        <p class="description">Join now to explore and experience a variety of inspiring events and
-                            organizations on our platform</p>
-                        <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
-                                class="bi bi-arrow-right"></i></a>
+                        <h4 class="title">Discover & Join</h4>
+                        <p class="description">Exciting Events Await!</p>
                     </div>
                 </div>
                 <!-- End Service Item -->
@@ -108,8 +104,6 @@
                     <div>
                         <h4 class="title">Together</h4>
                         <p class="description">Meet the participants, have fun.</p>
-                        <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
-                                class="bi bi-arrow-right"></i></a>
                     </div>
                 </div><!-- End Service Item -->
 
@@ -118,172 +112,40 @@
                     <div>
                         <h4 class="title">Adopt an Active Lifestyle</h4>
                         <p class="description">Stay Vibrant</p>
-                        <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
-                                class="bi bi-arrow-right"></i></a>
                     </div>
                 </div><!-- End Service Item -->
-
             </div>
-
         </div>
     </section><!-- End Featured Services Section -->
 
-    <!-- ======= About Us Section =======
-    <section id="about" class="about pt-0">
-        <div class="container" data-aos="fade-up">
 
-            <div class="row gy-4">
-                <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                    <img src="{% static 'event/img/about.jpg' %}" class="img-fluid" alt="">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-                </div>
-                <div class="col-lg-6 content order-last  order-lg-first">
-                    <h3>About Us</h3>
-                    <p>
-                        Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti.
-                        Sit quia
-                        molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt
-                        reiciendis
-                        veritatis asperiores placeat.
-                    </p>
-                    <ul>
-                        <li data-aos="fade-up" data-aos-delay="100">
-                            <i class="bi bi-diagram-3"></i>
-                            <div>
-                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+    <!-- ======= card Section ======= -->
+    <section class="restaurant-cards">
+        <div class="container mt-1">
+            <div class="row">
+                {% for event in events %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="event-detail.html">
+                            <img src="{{ event.image.url }}" alt="Restaurant Image" class="card-img-top">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <div class="rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="num-reviews">(413)</span>
                             </div>
-                        </li>
-                        <li data-aos="fade-up" data-aos-delay="200">
-                            <i class="bi bi-fullscreen-exit"></i>
-                            <div>
-                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata
-                                    redi</p>
-                            </div>
-                        </li>
-                        <li data-aos="fade-up" data-aos-delay="300">
-                            <i class="bi bi-broadcast"></i>
-                            <div>
-                                <h5>Voluptatem et qui exercitationem</h5>
-                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime
-                                    veniam</p>
-                            </div>
-                        </li>
-                    </ul>
+                            <p class="card-text">{{ event.event_date }}</p>
+                            <p class="card-text description">{{ event.description }}</p>
+                            <h6 class="availability-title">{{ event.date }}</h6>
+                            <a href="event-detail.html" class="btn btn-primary mt-auto">More Details</a>
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-
         </div>
-    </section>< !-- End About Us Section - ->
--->
-    <!-- ======= Services Section ======= -->
-    <section id="service" class="services pt-0">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <span>Upcoming events</span>
-                <h2>Upcoming events</h2>
-
-            </div>
-
-            <div class="row gy-4">
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/storage-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Storage</a></h3>
-                        <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam
-                            repellendus
-                            temporibus itaqueofficiis odit</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/logistics-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Logistics</a></h3>
-                        <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt
-                            molestiae
-                            dolor ipsam ducimus occaecati nisi</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/cargo-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Cargo</a></h3>
-                        <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
-                            oluptatem
-                            aut et molestiae ut et nihil</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/trucking-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Trucking</a></h3>
-                        <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
-                            oluptatem
-                            aut et molestiae ut et nihil</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/packaging-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
-                        <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur
-                            maiores
-                            beatae consequatur magni voluptates</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="{% static 'event/img/warehousing-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="service-details.html" class="stretched-link">Warehousing</a></h3>
-                        <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
-                            quisquam aut
-                            nostrum unde et qui est non quo nulla</p>
-                    </div>
-                </div><!-- End Card Item -->
-
-            </div>
-
-        </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Call To Action Section ======= -->
-    <section id="call-to-action" class="call-to-action">
-        <div class="container" data-aos="zoom-out">
-
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h3>Call To Action</h3>
-                    <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                        id est
-                        laborum.</p>
-                    <a class="cta-btn" href="#">Call To Action</a>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End Call To Action Section -->
+    </section>
 
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">

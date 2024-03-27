@@ -11,8 +11,6 @@
     <meta content="" name="keywords">
 
     {% block css_files %}
-    <!-- Favicons -->
-    <link href="{% static 'event/img/favicon.png' %}" rel="icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +18,7 @@
     <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{% static 'event/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -41,7 +40,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
         <div class="page-header d-flex align-items-center"
-             style="background-image: url({% static 'event/img/page-header.jpg' %});">
+             style="background-image: url({% static 'event/img/create-event.jpg' %});">
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
@@ -62,91 +61,74 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Featured Services Section ======= -->
-    <!-- ======= Services Section ======= -->
+    <!-- ======= Services Section =======
     <section id="service" class="services pt-0">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-out-up">
 
             <div class="section-header">
                 <span>Upcoming Events</span>
                 <h2>Upcoming Events</h2>
 
-            </div>
-
-            <div class="row gy-4">
+            </div>-->
+    <section class="restaurant-cards">
+        <div class="container mt-1">
+            <div class="row">
                 {% for event in events %}
-                <div class="col-lg-4 col-md-8" data-aos="fade-up">
-                    <div class="card">
-                        <div class="card-img">
-                            <div class="date-overlay">{{ event.date }}</div>
-                            <img src="{% static 'event/img/storage-service.jpg' %}" alt="" class="img-fluid">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                <a href="event-details.html" class="stretched-link">{{ event.name }}</a>
-                            </h3>
-                            <p class="card-text">{{ event.description }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="card-text mb-0">Tarih: <b>{{ event.event_date }}</b></p>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Daha Fazla</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Katıl</button>
-                                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="event-detail.html">
+                            <img src="{{ event.image.url }}" alt="Restaurant Image" class="card-img-top">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <div class="rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="num-reviews">(413)</span>
                             </div>
+                            <p class="card-text">{{ event.event_date }}</p>
+                            <p class="card-text description">{{ event.description }}</p>
+                            <h6 class="availability-title">{{ event.date }}</h6>
+                            <a href="a.html" class="btn btn-primary mt-auto">Join</a>
                         </div>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
                 {% endfor %}
             </div>
         </div>
+    </section>
+
+    <!--       <div class="row gy-4">
+               {% for event in events %}
+               <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-out-up">
+                   <div class="card h-100 rounded">
+                       <a href="event-details.html">
+                           <div class="card-img">
+                               <div class="date-overlay">{{ event.date }}</div>
+                               <img src="{{ event.image.url }}"
+                                    class="img-fluid">
+                           </div>
+                       </a>
+                       <div class="card-body">
+                           <h3 class="card-title">
+                               <a href="event-details.html">{{ event.name }}</a>
+                           </h3>
+                           <p class="card-text">{{ event.description }}</p>
+                           <p class="card-text mb-0">Event Date: {{ event.event_date }}</p>
+                       </div>
+                       <div class="card-footer d-flex justify-content-between align-items-center">
+                           <div></div>
+                           <div class="btn-group">
+                               <button type="button" class="btn btn-sm btn-outline-secondary ms-auto">Learn More
+                               </button>
+                               <button type="button" class="btn btn-sm btn-outline-secondary">Join</button>
+                           </div>
+                       </div>
+                   </div>
+               </div>< !-- End Card Item
+               {% endfor %}
+           </div>-->
+    </div>
     </section><!-- End Services Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-        <div class="container">
-
-            <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-
-                <div class="col-md-5">
-                    <img src="{% static 'event/img/features-1.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-md-7">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                    <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore
-                        magna aliqua.
-                    </p>
-                    <ul>
-                        <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                        <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                        <li><i class="bi bi-check"></i> Ullam est qui quos consequatur eos accusamus.</li>
-                    </ul>
-                </div>
-            </div><!-- Features Item -->
-
-            <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-                <div class="col-md-5 order-1 order-md-2">
-                    <img src="{% static 'event/img/features-2.jpg' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-md-7 order-2 order-md-1">
-                    <h3>Corporis temporibus maiores provident</h3>
-                    <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore
-                        magna aliqua.
-                    </p>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                        in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum
-                    </p>
-                </div>
-            </div><!-- Features Item -->
-        </div>
-    </section><!-- End Features Section -->
-
 
 </main><!-- End #main -->
 
