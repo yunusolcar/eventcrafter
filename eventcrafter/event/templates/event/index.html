@@ -126,19 +126,22 @@
                 {% for event in events %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="event-detail.html">
+                        <a href="{% url 'event-detail' event.slug %}">
                             <img src="{{ event.image.url }}" alt="Restaurant Image" class="card-img-top">
                         </a>
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ event.name }}</h5>
+                            <a href="{% url 'event-detail' event.slug %}">
+                                <h5 class="card-title">{{ event.name }}</h5>
+                            </a>
                             <div class="rating">
                                 <span class="stars">★★★★☆</span>
                                 <span class="num-reviews">(413)</span>
                             </div>
                             <p class="card-text">{{ event.event_date }}</p>
-                            <p class="card-text description">{{ event.description }}</p>
+                            <p class="card-text description">{{ event.description|striptags|slice:"0:100" }}...</p>
                             <h6 class="availability-title">{{ event.date }}</h6>
-                            <a href="event-detail.html" class="btn btn-primary mt-auto">More Details</a>
+                            <a href="{% url 'event-detail' event.slug %}" class="btn btn-primary mt-auto">More
+                                Details</a>
                         </div>
                     </div>
                 </div>

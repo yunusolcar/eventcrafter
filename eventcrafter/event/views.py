@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import CreateEventForm
 from django.utils import timezone
-from django.urls import reverse
-import pdb
 
 
 # Create your views here.
@@ -31,9 +29,9 @@ def events(request):
     return render(request, 'event/events.html', context)
 
 
-def single_event(request, slug):
+def event_detail(request, slug):
     event = Event.objects.get(slug=slug)
-    return render(request, 'event/single-event.html', {"event": event})
+    return render(request, 'event/event-detail.html', {"event": event})
 
 
 def about(request):

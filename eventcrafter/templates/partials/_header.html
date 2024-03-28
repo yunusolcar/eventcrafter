@@ -1,4 +1,5 @@
 <!-- ======= Header ======= -->
+{% load static %}
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
@@ -18,7 +19,7 @@
                 <li><a href="pricing.html">Community</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 {% if request.user.is_authenticated %}
-                <li><a class="get-a-quote" href="create-event">Create Event</a></li>
+                <li><a class="get-a-quote" href="{% url 'create-event' %}">Create Event</a></li>
                 {% else %}
                 <li><a class="get-a-quote" href="login">Login/Register</a></li>
                 {% endif %}
