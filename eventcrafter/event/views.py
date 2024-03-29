@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from event.models import Event
+from event.models import Event, Comment
 from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import CreateEventForm
@@ -29,9 +29,17 @@ def events(request):
     return render(request, 'event/events.html', context)
 
 
-def event_detail(request, slug):
-    event = Event.objects.get(slug=slug)
-    return render(request, 'event/event-detail.html', {"event": event})
+class CommentView(View):
+
+    def get(self, request, slug):
+        event = Event.objects.get(slug=slug)
+        comments = Comment.objects.filter(event=event)
+        print(comments)
+        context = {
+            'event': event,
+            'comments': comments
+        }
+        return render(request, 'event/event-detail.html', context)
 
 
 def about(request):
@@ -41,7 +49,6 @@ def about(request):
 class CreateEvent(View):
 
     def get(self, request):
-        # pdb.set_trace()
         form = CreateEventForm()
         return render(request, 'event/create-event.html', {'form': form})
 
