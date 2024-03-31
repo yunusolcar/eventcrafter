@@ -1527,7 +1527,8 @@ section {
 .contact .info-item p {
   padding: 0;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   color: rgba(14, 29, 52, 0.8);
 }
 
@@ -1664,7 +1665,7 @@ section {
 }
 
 .service-details p {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .service-details ul {
@@ -1911,7 +1912,7 @@ section {
 }
 
 .card {
-  border-radius: 20px; /* Kartların köşe yuvarlaklığını artırır */
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -1923,7 +1924,7 @@ section {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-top-left-radius: 20px; /* Resimlerin üst köşelerini de yuvarlar */
+  border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   display: block;
   margin-left: auto;

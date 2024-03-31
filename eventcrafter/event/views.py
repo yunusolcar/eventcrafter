@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from event.models import Event, Comment
 from django.contrib.auth.models import User
 from django.views.generic import View
-from .forms import CreateEventForm
+from .forms import CreateEventForm, CreateCommentForm
 from django.utils import timezone
 
 
@@ -10,8 +10,8 @@ from django.utils import timezone
 def index(request):
     now = timezone.now()
     events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:3]
-    participant_count = User.objects.all().count()
-    event_count = Event.objects.all().count()
+    participant_count = User.objects.count()
+    event_count = Event.objects.count()
     context = {
         'events': events,
         'participant_count': participant_count,
@@ -32,20 +32,36 @@ def events(request):
 class CommentView(View):
 
     def get(self, request, slug):
-        event = Event.objects.get(slug=slug)
-        comments = Comment.objects.filter(event=event)
-        print(comments)
+        event = get_object_or_404(Event, slug=slug)
+        form = CreateCommentForm
         context = {
             'event': event,
-            'comments': comments
+            'form': form
         }
         return render(request, 'event/event-detail.html', context)
+
+    def post(self, request, slug):
+        event = get_object_or_404(Event, slug=slug)
+        form = CreateCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.event = event
+            comment.save()
+            return redirect('event-detail', slug=slug)
+        else:
+            context = {
+                'event': event,
+                'form': form
+            }
+            return render(request, 'event/event-detail.html', context)
 
 
 def about(request):
     return render(request, 'event/about.html')
 
 
+# @login_required
 class CreateEvent(View):
 
     def get(self, request):

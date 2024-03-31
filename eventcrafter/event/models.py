@@ -10,6 +10,7 @@ class Event(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     event_date = models.DateField()
+    location = models.CharField(null=True, blank=True, max_length=50)
     image = models.ImageField(upload_to='events', null=True, blank=True)
     slug = models.SlugField(null=False, unique=True, db_index=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events', db_index=True)
