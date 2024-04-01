@@ -6,7 +6,7 @@ from event.models import Event, Comment
 class CreateEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'image', 'event_date', 'participants', 'location']
+        fields = ['name', 'description', 'image', 'event_date', 'location']
 
         widgets = {
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
@@ -14,7 +14,7 @@ class CreateEventForm(forms.ModelForm):
             'location': widgets.TextInput(attrs={'class': 'form-control'}),
             # 'image': widgets.FileInput(),
             'event_date': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'participants': widgets.SelectMultiple(attrs={'class': 'form-control'}),
+            # 'participants': widgets.SelectMultiple(attrs={'class': 'form-control'}),
             'creator': widgets.HiddenInput(),
         }
 

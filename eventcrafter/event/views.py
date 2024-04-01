@@ -32,10 +32,12 @@ def events(request):
 class CommentView(View):
 
     def get(self, request, slug):
-        event = get_object_or_404(Event, slug=slug)
-        form = CreateCommentForm
+        event = Event.objects.get(slug=slug)
+        comments = Comment.objects.filter(event=event)
+        form = CreateCommentForm()
         context = {
             'event': event,
+            'comments': comments,
             'form': form
         }
         return render(request, 'event/event-detail.html', context)
@@ -48,7 +50,7 @@ class CommentView(View):
             comment.user = request.user
             comment.event = event
             comment.save()
-            return redirect('event-detail', slug=slug)
+            return redirect('events')
         else:
             context = {
                 'event': event,
@@ -77,3 +79,23 @@ class CreateEvent(View):
             return redirect('create-event')
         else:
             return render(request, 'event/create-event.html', {'form': form})
+
+
+def joined_events(request, slug):
+    event = get_object_or_404(Event, slug=slug)
+
+    if request.method == "POST":
+        event.participants.add(request.user)
+        return redirect('event-detail', slug=slug)
+    else:
+        return redirect('about')
+
+
+def leaved_events(request, slug):
+    event = get_object_or_404(Event, slug=slug)
+
+    if request.method == "POST":
+        event.participants.remove(request.user)
+        return redirect('event-detail', slug=slug)
+    else:
+        return redirect('about')

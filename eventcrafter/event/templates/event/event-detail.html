@@ -112,7 +112,7 @@
                 {% for comment in comments %}
                 <div class="comment">
                     <div class="comment-header">
-                        <img src="{% static 'event/img/user-1.jpg' %}" alt="User 1">
+                        <img src="{% static 'event/img/user-1.jpg' %}" alt="image">
                         <h4>{{ comment.user.username|title }}</h4>
                     </div>
                     <p>{{ comment.text|capfirst }}</p>
@@ -151,8 +151,12 @@
                     <div class="info-item d-flex">
                         <i class="bi bi-phone flex-shrink-0"></i>
                         <div>
-                            <h4>Call:</h4>
-                            <p>+1 5589 55488 55</p>
+                            <h4>Participants</h4>
+                            {% if event.participants.all %}
+                            {% for participant in event.participants.all %}
+                            <p>{{ participant.username|title }}</p>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div><!-- End Info Item -->
                 </div>
@@ -174,6 +178,14 @@
                         </div>
                     </form>
                 </div><!-- End Comment Form -->
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if user in event.participants.all %}
+                    <button type="submit" formaction="{% url 'leaved_events' slug=event.slug %}">Leave</button>
+                    {% else %}
+                    <button type="submit" formaction="{% url 'joined_events' slug=event.slug %}">Join</button>
+                    {% endif %}
+                </form>
             </div>
         </div>
     </section>
