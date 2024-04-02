@@ -25,5 +25,5 @@ class CreateCommentForm(forms.ModelForm):
         fields = ['text']
 
         widgets = {
-            'text': widgets.TextInput(attrs={'class': 'form-control'}),
+            'text': widgets.Textarea(attrs={'class': 'form-control', }),
         }

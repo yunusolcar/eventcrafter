@@ -60,24 +60,18 @@
         </nav>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Featured Services Section ======= -->
-    <!-- ======= Services Section =======
-    <section id="service" class="services pt-0">
-        <div class="container" data-aos="fade-out-up">
-
-            <div class="section-header">
-                <span>Upcoming Events</span>
-                <h2>Upcoming Events</h2>
-
-            </div>-->
-    <section class="restaurant-cards">
+    <section class="cards">
         <div class="container mt-1">
             <div class="row">
                 {% for event in events %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="{% url 'event-detail' event.slug %}">
-                            <img src="{{ event.image.url }}" alt="Restaurant Image" class="card-img-top">
+                            {% if event.image %}
+                            <img src="{{ event.image.url }}" class="card-img-top">
+                            {% else %}
+                            <div style="background-color: white; width: 100%; height: 200px;"></div>
+                            {% endif %}
                         </a>
                         <div class="card-body d-flex flex-column">
                             <a href="{% url 'event-detail' event.slug %}">
@@ -99,39 +93,6 @@
             </div>
         </div>
     </section>
-
-    <!--       <div class="row gy-4">
-               {% for event in events %}
-               <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-out-up">
-                   <div class="card h-100 rounded">
-                       <a href="event-details.html">
-                           <div class="card-img">
-                               <div class="date-overlay">{{ event.date }}</div>
-                               <img src="{{ event.image.url }}"
-                                    class="img-fluid">
-                           </div>
-                       </a>
-                       <div class="card-body">
-                           <h3 class="card-title">
-                               <a href="event-details.html">{{ event.name }}</a>
-                           </h3>
-                           <p class="card-text">{{ event.description }}</p>
-                           <p class="card-text mb-0">Event Date: {{ event.event_date }}</p>
-                       </div>
-                       <div class="card-footer d-flex justify-content-between align-items-center">
-                           <div></div>
-                           <div class="btn-group">
-                               <button type="button" class="btn btn-sm btn-outline-secondary ms-auto">Learn More
-                               </button>
-                               <button type="button" class="btn btn-sm btn-outline-secondary">Join</button>
-                           </div>
-                       </div>
-                   </div>
-               </div>< !-- End Card Item
-               {% endfor %}
-           </div>-->
-    </div>
-    </section><!-- End Services Section -->
 
 </main><!-- End #main -->
 
