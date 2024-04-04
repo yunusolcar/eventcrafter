@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import CreateEvent, CommentView
+from .views import CreateEvent, CommentView, Autocomplete
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('create-event', CreateEvent.as_view(), name='create-event'),
     path('join/<slug:slug>', views.joined_events, name='joined_events'),
-    path('leave/<slug:slug>', views.leaved_events, name='leaved_events')
+    path('leave/<slug:slug>', views.leaved_events, name='leaved_events'),
+    path('autocomplete/', Autocomplete.as_view(), name='autocomplete'),
 ]

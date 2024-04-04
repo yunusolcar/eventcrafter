@@ -45,7 +45,8 @@
                 <h2 data-aos="fade-up">Create, participate and enjoy your events!</h2>
                 <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
                       data-aos-delay="200">
-                    <input type="text" class="form-control" placeholder="Find Event">
+                    <input type="text" id="search-box" class="form-control" placeholder="Find Event">
+                    <ul id="search-box-results"></ul>
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
 
@@ -226,7 +227,26 @@
 <!-- ======= Footer ======= -->
 {% include 'partials/_footer.html' %}
 <!-- End Footer -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#search-box').keyup(function(){
+            $.ajax({
+                type: "GET",
+                url: "{% url 'autocomplete' %}",
+                data: {
+                    'term': $('#search-box').val()
+                },
+                success: function(data){
+                    $('#search-box-results').empty();
+                    $.each(data, function(index, event){
+                        $('#search-box-results').append('<li><a href="/events/' + event.slug + '">' + event.name + '</a></li>');
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

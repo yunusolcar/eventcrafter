@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import CreateEventForm, CreateCommentForm
 from django.utils import timezone
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -99,3 +100,11 @@ def leaved_events(request, slug):
         return redirect('event-detail', slug=slug)
     else:
         return redirect('about')
+
+
+class Autocomplete(View):
+    def get(self, request):
+        query = request.GET.get('term', '')
+        events = Event.objects.filter(slug__icontains=query)[:3]
+        data = [{'id': event.id, 'name': event.name, 'slug': event.slug} for event in events]
+        return JsonResponse(data, safe=False)
