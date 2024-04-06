@@ -4,6 +4,7 @@ from .views import CreateEvent, CommentView, Autocomplete
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('index', views.index, name='index'),
     path('events/', views.events, name='events'),
     path('events/<slug:slug>', CommentView.as_view(), name='event-detail'),
     path('about', views.about, name='about'),
