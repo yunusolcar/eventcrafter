@@ -12,14 +12,13 @@
 
     {% block css_files %}
     <!-- Favicons -->
-    <link href="{% static 'event/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'event/img/favicon-32x32.png' %}" rel="icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{% static 'event/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -43,7 +42,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
         <div class="page-header d-flex align-items-center"
-             style="background-image: url({% static 'event/img/page-header.jpg' %});">
+             style="background-image: url({% static 'event/img/Running.jpg' %});">
 
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
@@ -72,38 +71,51 @@
 
             <div class="row gy-4">
                 <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-                    <img src="{% static 'event/img/about.jpg' %}" class="img-fluid" alt="">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+                    <img src="{% static 'event/img/İstanbul-Yari-Maratonu-1-scaled.jpg' %}" class="img-fluid" alt="">
+                    <a href="https://youtu.be/UrL2FJ3CaUQ" class="glightbox play-btn"></a>
                 </div>
                 <div class="col-lg-6 content order-last  order-lg-first">
                     <h3>About Us</h3>
                     <p>
-                        Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti.
-                        Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius
-                        incidunt reiciendis veritatis asperiores placeat.
+                        EventCrafter is a platform that helps people organize and participate in events, strengthening
+                        social bonds and promoting a healthy lifestyle. Our mission is to increase the social
+                        interaction of individuals, bring communities together and promote a healthy lifestyle.
                     </p>
                     <ul>
                         <li data-aos="fade-up" data-aos-delay="100">
                             <i class="bi bi-diagram-3"></i>
                             <div>
-                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                                <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+                                <h5>Strengthening Social Bonds</h5>
+                                <p>
+                                    EventCrafter brings people together to make new connections. In our communities, you
+                                    can meet and interact with people with similar interests. Our events offer a social
+                                    environment where you can invite friends and family to spend time together.
+                                </p>
                             </div>
                         </li>
                         <li data-aos="fade-up" data-aos-delay="200">
-                            <i class="bi bi-fullscreen-exit"></i>
+                            <i class="bi bi-calendar-plus"></i>
                             <div>
-                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                                <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata
-                                    redi</p>
+                                <h5>Ease of Creating and Participating in Events</h5>
+                                <p>
+                                    EventCrafter allows you to easily plan and promote your events. With its simple
+                                    interface and user-friendly design, you can create your events in a few steps and
+                                    invite interested parties. You can also browse interesting events and easily
+                                    register for the activities you want to participate in.
+                                </p>
                             </div>
                         </li>
                         <li data-aos="fade-up" data-aos-delay="300">
-                            <i class="bi bi-broadcast"></i>
+                            <i class="bi bi-calendar-heart"></i>
                             <div>
-                                <h5>Voluptatem et qui exercitationem</h5>
-                                <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime
-                                    veniam</p>
+                                <h5>Promoting a Healthy Lifestyle</h5>
+                                <p>
+                                    Maintaining a healthy lifestyle is the foundation of a happy and balanced life.
+                                    EventCrafter offers our users the opportunity to participate in healthy activities
+                                    such as sporting events, nature walks, yoga classes and many more. We also aim to
+                                    improve the health and well-being of our community by organizing informative events
+                                    such as nutrition seminars and health conferences.
+                                </p>
                             </div>
                         </li>
                     </ul>
@@ -117,37 +129,31 @@
     <section id="stats-counter" class="stats-counter pt-0">
         <div class="container" data-aos="fade-up">
 
-            <div class="row gy-4">
+            <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
 
                 <div class="col-lg-3 col-md-6">
                     <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                        <span data-purecounter-start="0" data-purecounter-end="{{ event_count }}"
+                              data-purecounter-duration="2"
                               class="purecounter"></span>
-                        <p>Clients</p>
+                        <p>Total Events</p>
                     </div>
                 </div><!-- End Stats Item -->
 
                 <div class="col-lg-3 col-md-6">
                     <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                        <span data-purecounter-start="0" data-purecounter-end="11" data-purecounter-duration="2"
                               class="purecounter"></span>
-                        <p>Projects</p>
+                        <p>Completed</p>
                     </div>
                 </div><!-- End Stats Item -->
 
                 <div class="col-lg-3 col-md-6">
                     <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
+                        <span data-purecounter-start="0" data-purecounter-end="{{ participant_count }}"
+                              data-purecounter-duration="2"
                               class="purecounter"></span>
-                        <p>Hours Of Support</p>
-                    </div>
-                </div><!-- End Stats Item -->
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
-                              class="purecounter"></span>
-                        <p>Workers</p>
+                        <p>Participants</p>
                     </div>
                 </div><!-- End Stats Item -->
 
@@ -173,10 +179,9 @@
                         <img src="{% static 'event/img/team/team-1.jpg' %}" class="img-fluid" alt="">
                         <div class="member-content">
                             <h4>Walter White</h4>
-                            <span>Web Development</span>
+                            <span>CEO</span>
                             <p>
-                                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis
-                                quaerat qui aut aut aut
+                                EventCrafter CEO
                             </p>
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
@@ -193,10 +198,9 @@
                         <img src="{% static 'event/img/team/team-2.jpg' %}" class="img-fluid" alt="">
                         <div class="member-content">
                             <h4>Sarah Jhinson</h4>
-                            <span>Marketing</span>
+                            <span>Web Developer</span>
                             <p>
-                                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum
-                                rerum temporibus
+                                Full-Stack Developer
                             </p>
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
@@ -213,10 +217,9 @@
                         <img src="{% static 'event/img/team/team-3.jpg' %}" class="img-fluid" alt="">
                         <div class="member-content">
                             <h4>William Anderson</h4>
-                            <span>Content</span>
+                            <span>Manager</span>
                             <p>
-                                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum
-                                toro des clara
+                                EventCrafter Manager
                             </p>
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>

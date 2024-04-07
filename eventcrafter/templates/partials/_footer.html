@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-info">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href="{% url 'index' %}" class="logo d-flex align-items-center">
                     <span>EventCrafter</span>
                 </a>
                 <p>Socialize at its Best: Enrich Your Life with Our Events!</p>
@@ -22,8 +22,7 @@
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About us</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <!--<li><a href="#">Community</a></li> -->
                 </ul>
             </div>
 
