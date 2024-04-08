@@ -5,9 +5,10 @@ from django.views.generic import View
 from .forms import CreateEventForm, CreateCommentForm
 from django.utils import timezone
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+@login_required(login_url='/account/login')
 def index(request):
     now = timezone.now()
     events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:3]
@@ -22,6 +23,7 @@ def index(request):
     return render(request, 'event/index.html', context)
 
 
+@login_required(login_url='/account/login')
 def events(request):
     now = timezone.now()
     events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:12]
@@ -31,7 +33,6 @@ def events(request):
 
 
 class CommentView(View):
-
     def get(self, request, slug):
         event = Event.objects.get(slug=slug)
         comments = Comment.objects.filter(event=event)
@@ -60,13 +61,19 @@ class CommentView(View):
             return render(request, 'event/event-detail.html', context)
 
 
+@login_required(login_url='/account/login')
 def about(request):
-    return render(request, 'event/about.html')
+    participant_count = User.objects.count()
+    event_count = Event.objects.count()
+    context = {
+        'events': events,
+        'participant_count': participant_count,
+        'event_count': event_count
+    }
+    return render(request, 'event/about.html', context)
 
 
-# @login_required
 class CreateEvent(View):
-
     def get(self, request):
         form = CreateEventForm()
         return render(request, 'event/create-event.html', {'form': form})
@@ -82,6 +89,7 @@ class CreateEvent(View):
             return render(request, 'event/create-event.html', {'form': form})
 
 
+@login_required(login_url='/account/login')
 def joined_events(request, slug):
     event = get_object_or_404(Event, slug=slug)
 
@@ -92,6 +100,7 @@ def joined_events(request, slug):
         return redirect('about')
 
 
+@login_required(login_url='/account/login')
 def leaved_events(request, slug):
     event = get_object_or_404(Event, slug=slug)
 
@@ -103,6 +112,7 @@ def leaved_events(request, slug):
 
 
 class Autocomplete(View):
+
     def get(self, request):
         query = request.GET.get('term', '')
         events = Event.objects.filter(slug__icontains=query)[:3]

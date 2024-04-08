@@ -176,7 +176,7 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form action="{% url 'event-detail' event.slug %}" method="POST" class="php-email-form">
+                    <form action="{% url 'event-detail' event.slug %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="text" class="fw-bold">Subject</label>
