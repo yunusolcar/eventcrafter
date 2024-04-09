@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def login_request(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -27,4 +30,5 @@ def register_request(request):
 
 
 def logout_request(request):
-    return render(request, 'account/logout.html')
+    logout(request)
+    return redirect('login')
