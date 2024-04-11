@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from event.models import Event, Comment
 from django.contrib.auth.models import User
 from django.views.generic import View
@@ -52,7 +52,7 @@ class CommentView(View):
             comment.user = request.user
             comment.event = event
             comment.save()
-            return redirect('events')
+            return redirect(reverse('event-detail', kwargs={'slug': slug}))
         else:
             context = {
                 'event': event,
