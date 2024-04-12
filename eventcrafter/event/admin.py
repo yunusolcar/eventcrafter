@@ -5,7 +5,7 @@ from .models import Event, Notification, Comment
 # Register your models here.
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'created_at', 'slug', 'event_date')
+    list_display = ('name', 'description', 'created_at', 'slug', 'event_date', 'is_active')
     search_fields = ('name', 'member')
     readonly_fields = ('slug',)
 

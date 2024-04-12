@@ -73,22 +73,6 @@
                         <a href="#">Meet</a>
                         <a href="#frm">Fun</a>
                     </div>
-
-                    <h4>Event Date</h4>
-                    <p>{{ event.event_date }}</p>
-
-                    <form method="POST" id="frm">
-                        {% csrf_token %}
-                        {% if user in event.participants.all %}
-                        <button type="submit" class="btn btn-danger"
-                                formaction="{% url 'leaved_events' slug=event.slug %}">Leave
-                        </button>
-                        {% else %}
-                        <button type="submit" class="btn btn-success"
-                                formaction="{% url 'joined_events' slug=event.slug %}">Join
-                        </button>
-                        {% endif %}
-                    </form>
                 </div>
 
                 <div class="col-lg-8" id="desc">
@@ -98,13 +82,6 @@
                     <div style="background-color: white; width: 100%; height: 200px;"></div>
                     {% endif %}
                     <h3>{{ event.name }}</h3>
-                    <!--  <p>Lorem ipsum dolor sit amet.</p>
-                          <ul>
-                               <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-                               <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span>
-                               </li>
-                               <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-                           </ul> -->
                     <p>{{ event.description }}</p>
                 </div>
             </div>
@@ -112,88 +89,101 @@
     </section><!-- End Service Details Section -->
 
 
-    <!-- ======= Comments Section ======= -->
-    <section id="comments" class="comments">
-        <div class="container">
-            <div class="section-title">
-                {% if comments %}
-                <h2>Comments</h2>
-                {% endif %}
-            </div>
-
-            <div class="comment-container">
-                {% if comments %}
-                {% for comment in comments %}
-                <div class="comment">
-                    <div class="comment-header">
-                        <img src="{% static 'event/img/user-1.jpg' %}" alt="image">
-                        <h4>{{ comment.user.username|title }}</h4>
-                    </div>
-                    <p>{{ comment.text|capfirst }}</p>
-                    <p>{{ comment.timestamp }}</p>
-                </div>
-                {% endfor %}
-                {% else %}
-                <h2>No Comments</h2>
-                {% endif %}
-            </div>
-        </div>
-    </section>
-
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="row gy-4 mt-4">
-                <div class="col-lg-4">
-                    <div class="info-item d-flex">
-                        <i class="bi bi-geo-alt flex-shrink-0"></i>
-                        <div>
-                            <h4>{{ event.location }}</h4>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex">
-                        <i class="bi bi-person bi-lg"></i>
-                        <div>
-                            <h4>Event's Creator</h4>
-                            <p>{{ event.creator|title }}</p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex">
-                        <i class="bi bi-people-fill flex-shrink-0"></i>
-                        <div>
-                            <h4>Participants</h4>
-                            <div class="participants-list">
-                                {% if event.participants.all %}
-                                {% for participant in event.participants.all|slice:":2" %}
-                                <p>{{ participant.username|title }}</p>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div><!-- End Info Item -->
-                </div>
-
-                <div class="col-lg-8">
-                    <form action="{% url 'event-detail' event.slug %}" method="POST">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="text" class="fw-bold">Subject</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="subject-addon"><i
-                                        class="bi bi-chat-dots-fill"></i></span>
+    <!-- ======= Comments  ======= -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mb-4">
+                <div class="card shadow-0 border mb-4" style="background-color: #f0f2f5;">
+                    <div class="card-body p-4">
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <form action="{% url 'event-detail' event.slug %}" method="POST">
+                                {% csrf_token %}
+                                <label class="form-label" for="addANote">Add a Comment</label>
                                 {{ form.text }}
+                                <button type="submit" class="btn btn-outline-success btn-sm mt-3 px-4 py-2 float-end">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+
+                        {% if comments %}
+                        {% for comment in comments %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <p><b>{{ comment.text|capfirst }}</b></p>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <i class="bi bi-person-circle"></i>
+                                        <p class="small mb-0 ms-2">{{ comment.user.username|title }}</p>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <i class="bi bi-clock me-1"></i>
+                                        <p class="small text-muted mb-0">{{ comment.timestamp|date:"j F Y, H:i" }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Send Your Comment</button>
-                        </div>
-                    </form>
-                </div><!-- End Comment Form -->
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+
+            <!-- Info Item -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-0 border mb-4" style="background-color: #f0f2f5;">
+                    <div class="card-body p-4">
+                        <h4>Event Date</h4>
+                        <p>{{ event.event_date }}</p>
+
+                        <form method="POST" id="frm">
+                            {% csrf_token %}
+                            {% if user in event.participants.all %}
+                            <button type="submit" class="btn btn-danger"
+                                    formaction="{% url 'leaved_events' slug=event.slug %}">Leave
+                            </button>
+                            {% else %}
+                            <button type="submit" class="btn btn-success"
+                                    formaction="{% url 'joined_events' slug=event.slug %}">Join
+                            </button>
+                            {% endif %}
+                        </form>
+
+                        <section id="contact" class="contact">
+                            <div class="info-item d-flex">
+                                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                                <div>
+                                    <h4>{{ event.location }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="info-item d-flex">
+                                <i class="bi bi-person bi-lg"></i>
+                                <div>
+                                    <h4>Event's Creator</h4>
+                                    <p>{{ event.creator|title }}</p>
+                                </div>
+                            </div>
+
+                            <div class="info-item d-flex">
+                                <i class="bi bi-people-fill flex-shrink-0"></i>
+                                <div>
+                                    <h4>Participants</h4>
+                                    <div class="participants-list">
+                                        {% if event.participants.all %}
+                                        {% for participant in event.participants.all|slice:":2" %}
+                                        <p>{{ participant.username|title }}</p>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div><!-- End Info Item -->
+                        </section>
+                    </div>
+                </div>
+            </div>
 
 
 </main><!-- End #main -->

@@ -14,7 +14,8 @@ class Event(models.Model):
     image = models.ImageField(upload_to='events', null=True, blank=True)
     slug = models.SlugField(null=False, unique=True, db_index=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events', db_index=True)
-    participants = models.ManyToManyField(User, related_name='joined_events')
+    participants = models.ManyToManyField(User, related_name='joined_events', blank=True)
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Event'
@@ -25,6 +26,8 @@ class Event(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        if self.event_date < timezone.now().date():
+            self.is_active = False
         super().save(*args, **kwargs)
 
 

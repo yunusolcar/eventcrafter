@@ -3,17 +3,19 @@ from event.models import Event, Comment
 from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import CreateEventForm, CreateCommentForm
-from django.utils import timezone
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/account/login')
 def index(request):
-    now = timezone.now()
-    events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:3]
+    events = Event.objects.filter(is_active=True).order_by('event_date')[:3]
     participant_count = User.objects.count()
     event_count = Event.objects.count()
+
+    for event in events:
+        event.comment_count = Comment.objects.filter(event=event).count()
+
     context = {
         'events': events,
         'participant_count': participant_count,
@@ -25,10 +27,13 @@ def index(request):
 
 @login_required(login_url='/account/login')
 def events(request):
-    now = timezone.now()
-    events = Event.objects.filter(event_date__gte=now).order_by('event_date')[:12]
+    events = Event.objects.filter(is_active=True).order_by('event_date')[:12]
     context = {
-        'events': events}
+        'events': events
+    }
+    for event in events:
+        event.comment_count = Comment.objects.filter(event=event).count()
+
     return render(request, 'event/events.html', context)
 
 
@@ -115,6 +120,6 @@ class Autocomplete(View):
 
     def get(self, request):
         query = request.GET.get('term', '')
-        events = Event.objects.filter(slug__icontains=query)[:3]
+        events = Event.objects.filter(slug__icontains=query, is_active=True)[:3]
         data = [{'id': event.id, 'name': event.name, 'slug': event.slug} for event in events]
         return JsonResponse(data, safe=False)
