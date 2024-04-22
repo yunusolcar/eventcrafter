@@ -64,7 +64,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #001973;
+  color: #E52B50;
   position: relative;
   z-index: 2;
   margin-bottom: 20px;
@@ -128,7 +128,7 @@ section {
 
 .breadcrumbs .page-header:before {
   content: "";
-  background-color: rgba(14, 29, 52, 0.8);
+
   position: absolute;
   inset: 0;
 }
@@ -291,7 +291,7 @@ section {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  color: #afe214;
+  color: #b2ec00;
   font-family: var(--font-primary);
 }
 
@@ -345,7 +345,7 @@ section {
 
   .navbar .get-a-quote,
   .navbar .get-a-quote:focus {
-    background: var(--color-primary);
+    background: #2756ff;
     padding: 8px 20px;
     margin-left: 30px;
     border-radius: 4px;
@@ -354,8 +354,8 @@ section {
 
   .navbar .get-a-quote:hover,
   .navbar .get-a-quote:focus:hover {
-    color: #fff;
-    background: #2756ff;
+    color: #000000;
+    background: #b2ec00;
   }
 
   .navbar .dropdown ul {
@@ -769,7 +769,7 @@ section {
 }
 
 .services .card a {
-  color: #001973;
+  color: #fff;
   transition: 0.3;
 }
 
@@ -1528,6 +1528,7 @@ section {
   padding: 0;
   margin-bottom: 0;
   font-size: 14px;
+  font-weight: 500;
   color: rgba(14, 29, 52, 0.8);
 }
 
@@ -1664,7 +1665,7 @@ section {
 }
 
 .service-details p {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .service-details ul {
@@ -1692,8 +1693,8 @@ section {
   width: 100%;
   min-height: 50vh;
   background-color: var(--color-secondary);
-  background-image: url("/assets/img/testimonials/run.jpeg");
-  filter: brightness(80%);
+  background-image: url({% static 'event/img/running2.jpg' %});
+  filter: brightness(85%);
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1701,12 +1702,16 @@ section {
 
 }
 
+
 .hero h2 {
   margin-bottom: 20px;
   padding: 0;
-  font-size: 48px;
+  font-size: 55px;
   font-weight: 700;
+  background-color: #b2ec00;
+  border-radius: 20px;
   color: #000000;
+
 }
 
 @media (max-width: 575px) {
@@ -1724,6 +1729,7 @@ section {
 .hero form {
   background: #fff;
   padding: 10px;
+  margin-top: 25px;
   border-radius: 10px;
 }
 
@@ -1903,4 +1909,169 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #ffd700;
+  margin-top: auto;
+}
+
+.num-reviews {
+  margin-left: 5px;
+  color: #666;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.availability-title {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.book-button {
+  margin-top: auto;
+}
+
+
+/* ======= Comments Section Styles ======= */
+.comments {
+    padding: 80px 0;
+}
+
+.comment-container {
+    margin-top: 40px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.comment p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.add-comment {
+    margin-top: 40px;
+}
+
+.add-comment h3 {
+    margin-bottom: 20px;
+}
+
+.add-comment form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.add-comment .form-group {
+    margin-bottom: 20px;
+}
+
+.add-comment textarea {
+    resize: none;
+    height: 150px;
+}
+
+.add-comment button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-comment button:hover {
+    background-color: #0056b3;
+}
+.form-search {
+    position: relative;
+}
+
+#search-box-results {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: calc(100% - 2px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#search-box-results li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#search-box-results li:last-child {
+    border-bottom: none;
+}
+
+#search-box-results li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px;
+}
+
+#search-box-results li a:hover {
+    background-color: #f4f4f4;
 }

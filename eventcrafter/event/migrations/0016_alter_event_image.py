@@ -6,9 +6,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0015_alter_event_image'),
+        ('event', '0011_alter_event_creator_alter_notification_message'),
     ]
-
     operations = [
         migrations.AlterField(
             model_name='event',
