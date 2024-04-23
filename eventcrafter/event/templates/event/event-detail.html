@@ -46,7 +46,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
                         <h2>{{ event.name }}</h2>
-                        <p><a href="#desc" class="link-light">Would you like to join?</a></p>
+                        <p><a href="#form2" class="link-light">Would you like to join?</a></p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-8" id="desc">
+                <div class="col-lg-8">
                     {% if event.image %}
                     <img src="{{ event.image.url }}" alt="" class="img-fluid services-img">
                     {% else %}
@@ -134,7 +134,7 @@
             <!-- Info Item -->
             <div class="col-md-4 mb-4">
                 <div class="card shadow-0 border mb-4" style="background-color: #f0f2f5;">
-                    <div class="card-body p-4">
+                    <div class="card-body p-4" id="form2">
                         <h4>Event Date</h4>
                         <p>{{ event.event_date }}</p>
 

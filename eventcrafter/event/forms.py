@@ -12,7 +12,7 @@ class CreateEventForm(forms.ModelForm):
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
             'description': widgets.TextInput(attrs={'class': 'form-control'}),
             'location': widgets.TextInput(attrs={'class': 'form-control'}),
-            'image': widgets.FileInput(),
+            'image': widgets.FileInput(attrs={'class': 'form-control'}),
             'event_date': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'creator': widgets.HiddenInput(),
         }
