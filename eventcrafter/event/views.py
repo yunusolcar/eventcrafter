@@ -84,12 +84,12 @@ class CreateEvent(View):
         return render(request, 'event/create-event.html', {'form': form})
 
     def post(self, request):
-        form = CreateEventForm(request.POST)
+        form = CreateEventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
             event.creator = request.user
             event.save()
-            return redirect('create-event')
+            return redirect('events')
         else:
             return render(request, 'event/create-event.html', {'form': form})
 
