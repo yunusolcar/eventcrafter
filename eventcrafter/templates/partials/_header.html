@@ -14,8 +14,6 @@
                 <li><a href="{% url 'index' %}" class="active">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <!--<li><a href="pricing.html">Community</a></li> -->
-                <!--< <li><a href="contact.html">Contact</a></li>-->
                 {% if request.user.is_authenticated %}
                 <li><a class="get-a-quote" href="{% url 'logout' %}">Logout</a></li>
                 {% endif %}
